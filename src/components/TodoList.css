@@ -1,0 +1,21 @@
+.todo-list{
+    align-content: center !important;
+    margin-top: 20px;
+}
+
+li {
+    list-style-type: none;
+}
+.edit-btn{
+    margin-right: 90px;
+    margin-left: 0px;
+}
+.grid{
+   
+    display: grid;
+    grid-template-columns: auto auto ;
+}
+.grid-icons{
+    display: grid;
+    grid-template-columns: auto auto auto ;
+}
