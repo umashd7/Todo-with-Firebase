@@ -20,7 +20,7 @@ function DialogUpdate(props) {
             todo: updatedTodo
         }, { merge: true })
         
-        props.handleClose()
+        props.handleClose();
     }
     const handleClose = ()=>{
         props.handleClose()     
