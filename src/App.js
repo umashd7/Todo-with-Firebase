@@ -1,12 +1,10 @@
-
 import './App.css';
-import InputArea from './components/InputArea';
+import Authorize from './components/Authorize';
 
 function App() {
   return (
     <div className="App">
-      <h1>TODO APP</h1> 
-      <InputArea/>
+      <Authorize/>
     </div>
   );
 }

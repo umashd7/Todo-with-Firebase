@@ -28,24 +28,35 @@ function TodoList(props) {
     };
 
     const checkBoxClicked = (e)=>{      
+        let res = ''
+        let text = ''
+
        if(checked === false){   
-            alert("Wanna close the task ?")    
-            setChecked(!checked)                 
+            text  = "Wanna close the task ?"  ;                           
         }
         if(checked === true){        
-            alert("Wanna re-open the task ?")    
-            setChecked(!checked)                
+            text = "Wanna re-open the task ?"                             
             }            
+        
+        res = window.confirm(text);
+        if(res === true){
+            setChecked(!checked)
         }
-    
-
-    const deleteTodo = (e) => {
-        db.collection('todos').doc(props.todoObj.id).delete()
+        else {
+            return
+        }
     }
 
+    const deleteTodo = (e) => {
+        console.log('inside delete',props.user.uid)
+        
+        db.collection('todos').doc(props.user.uid).update({
+            userTodos : firebase.firestore.FieldValue.arrayRemove(props.todoObj)
+        },{  merge: true })  
+    }    
     return (
         <div>
-            <DialogUpdate open = {open} handleOpen = {handleOpen} handleClose = {handleClose} todoObj = {props.todoObj}   />
+            <DialogUpdate open = {open} handleOpen = {handleOpen} handleClose = {handleClose} todoObj = {props.todoObj} user = {props.user}  />
                 <List style={{marginTop: '1.5rem'}} >
                 <Grid container lg ='4'  alignContent ="stretch" spacing={0} justifyContent = "space-evenly" >
                     <ListItem divider={true} disabled = {checked} style = {{color : 'aqua'}}>

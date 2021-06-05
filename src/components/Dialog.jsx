@@ -10,16 +10,23 @@ import {
 
 } from '@material-ui/core'
 import db from '../firebase'
-function DialogUpdate(props) {
-    console.log('todo',props.todoObj.todo)
+import firebase from 'firebase'
+
+function DialogUpdate(props) {    
     const [updatedTodo, setupdatedTodo] = useState("")
 
-    const handleUpdate = (e) => {
-     
-            db.collection('todos').doc(props.todoObj.id).set({
-            todo: updatedTodo
+    const handleUpdate = async (e) => {
+
+        await  db.collection('todos').doc(props.user.uid).update({
+            userTodos : firebase.firestore.FieldValue.arrayRemove(props.todoObj)
+        },{  merge: true })  
+
+        await db.collection('todos').doc(props.user.uid).update({
+            userTodos: firebase.firestore.FieldValue.arrayUnion(
+                { todo: updatedTodo, todoId: props.todoObj.todoId , timestamp: props.todoObj.timestamp }
+            )
         }, { merge: true })
-        
+
         props.handleClose();
     }
     const handleClose = ()=>{
@@ -34,7 +41,8 @@ function DialogUpdate(props) {
             onClose={props.handleClose}
             aria-labelledby="form-dialog-title"
             fullWidth="lg"
-            onBackdropClick={props.handleClose}>
+            onBackdropClick={props.handleClose}
+            >
             <DialogTitle id="form-dialog-title">Update Your Todo</DialogTitle>
             <DialogContent>
                  <InputLabel >Feel like changing ? Go ahead</InputLabel>
