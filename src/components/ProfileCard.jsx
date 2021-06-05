@@ -1,4 +1,4 @@
-import {Avatar, Button, Card,Dialog,DialogActions,DialogContent,DialogTitle,FormLabel,Modal,Paper, TextField} from '@material-ui/core'
+import { Button,Dialog,DialogActions,DialogContent,DialogTitle,FormLabel } from '@material-ui/core'
 import React from 'react'
 
 function ProfileCard(props) {

@@ -25,7 +25,7 @@ function InputArea(props) {
         .then((doc)=>{
             if(!doc.exists){
                 console.log('Creating new document')
-                db.collection('todos').doc(props.user.uid).set({userId: props.user.uid, userTodos: []})
+                db.collection('todos').doc(props.user.uid).set({username : props.user.userName,userId: props.user.uid, userTodos: []})
                 .then(()=>{
                     getOnSnapshot(doc)
                 })
@@ -48,7 +48,7 @@ function InputArea(props) {
                 if(snapshotDoc.id===doc.id)   {
                     const {userTodos, userID} = snapshotDoc.data()    
                     console.log('userTodos',userTodos)                     
-                    setTodos(userTodos)
+                    setTodos(userTodos.reverse())
                 }                                                                                 
             });
         })
